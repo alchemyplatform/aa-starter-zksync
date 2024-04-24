@@ -1,12 +1,14 @@
-import LoginDialog from "./login-dialog";
+import { useSignerStatus } from "@alchemy/aa-alchemy/react";
 import { Button } from "../ui/button";
 import { Dialog, DialogTrigger } from "../ui/dialog";
+import LoginDialog from "./login-dialog";
 
-export default function cta() {
+export default function Cta() {
+  const { isInitializing, isAuthenticating } = useSignerStatus();
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Login</Button>
+        <Button disabled={isInitializing || isAuthenticating}>Login</Button>
       </DialogTrigger>
       <LoginDialog />
     </Dialog>

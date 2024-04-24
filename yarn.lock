@@ -12,20 +12,20 @@
   resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.10.0.tgz#d2a39395c587e092d77cbbc80acf956a54f38bf7"
   integrity sha512-nA9XHtlAkYfJxY7bce8DcN7eKxWWCWkU+1GR9d+U6MbNpfwQp8TI7vqOsBsMcHoT4mBu2kypKoSKnghEzOOq5Q==
 
-"@alchemy/aa-accounts@^3.8.2-alpha.0", "@alchemy/aa-accounts@^3.8.2-alpha.1":
-  version "3.8.2-alpha.1"
-  resolved "https://registry.yarnpkg.com/@alchemy/aa-accounts/-/aa-accounts-3.8.2-alpha.1.tgz#3513d3a2158f5ffc3709458d96463d4fb9a7b06a"
-  integrity sha512-BvgHjFyAio9Qa33Xvw2+eLAVDW2DDkXKhoGt/EVeFZhSlgd6F2lexA2S8KCGrEKUQSFmgeNsC4sqiRyelJeuRg==
+"@alchemy/aa-accounts@^3.8.2-alpha.0", "@alchemy/aa-accounts@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@alchemy/aa-accounts/-/aa-accounts-3.9.0.tgz#b29a25bf695c0caf987a2a6afa1e77dda0651e0e"
+  integrity sha512-f9LcKFjgoKUDXiTNazjZ74429Lj6tSr1Jw6staWOAA8ILaRh312oU94owU5O+9l7kPGZQbjvZS7ngcwQcsZv+A==
   dependencies:
-    "@alchemy/aa-core" "^3.8.2-alpha.1"
+    "@alchemy/aa-core" "^3.9.0"
     viem "2.8.6"
 
-"@alchemy/aa-alchemy@^3.9.0-alpha.3":
-  version "3.9.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@alchemy/aa-alchemy/-/aa-alchemy-3.9.0-alpha.3.tgz#7bf22cddac66ba8b949947929b909372768ab806"
-  integrity sha512-HYCH69vyHPlGzFiEA9y9uT7z4z3ZTLGnY2emOs30JDpdGfuqBamIr7LxU04U6xVWHZB8RN2ZNK/0qxbZCOuAJQ==
+"@alchemy/aa-alchemy@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@alchemy/aa-alchemy/-/aa-alchemy-3.9.0.tgz#65c45a846fd6016299d1598c99120255476aeacd"
+  integrity sha512-seXtHYgYDjPvDtmXtPcsRRpRytActtHn2IDwqCi+2gtQ65Wj/kHiHZFRWVLQgjpjqzCw6X/oiJgFJuhnaONJJg==
   dependencies:
-    "@alchemy/aa-core" "^3.8.2-alpha.1"
+    "@alchemy/aa-core" "^3.9.0"
     "@turnkey/http" "^2.6.2"
     "@turnkey/iframe-stamper" "^1.0.0"
     "@turnkey/viem" "^0.4.8"
@@ -37,10 +37,10 @@
     "@alchemy/aa-accounts" "^3.8.2-alpha.0"
     alchemy-sdk "^3.0.0"
 
-"@alchemy/aa-core@^3.8.2-alpha.1":
-  version "3.8.2-alpha.1"
-  resolved "https://registry.yarnpkg.com/@alchemy/aa-core/-/aa-core-3.8.2-alpha.1.tgz#195ef93d45942f2d8fc077abd5dd02dc12ed008f"
-  integrity sha512-zrEiuo4vuZq8vq5Nba5xztSIQFDW3tFK93mFnoUhjxUeJYZ7By8YR/A8Q8nE8jPsfiw9x9S334IYGaaetcIctg==
+"@alchemy/aa-core@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@alchemy/aa-core/-/aa-core-3.9.0.tgz#04390895f4955b01fadfc0bc4e3f288997d5788b"
+  integrity sha512-Z90oIl/7dGxEQBauKTzJf5c8svOWGabY88ngmH7Em3WNpHGx8xKlhKJMB8Rri9P7pGa7bzOD41H/IGWG2DG1vg==
   dependencies:
     abitype "^0.8.3"
     eventemitter3 "^5.0.1"
@@ -1040,9 +1040,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^18":
-  version "18.2.77"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.77.tgz#af2f857b6a6dfb6ca89ec102ebc147b1f1616880"
-  integrity sha512-CUT9KUUF+HytDM7WiXKLF9qUSg4tGImwy4FXTlfEDPEkkNUzJ7rVFolYweJ9fS1ljoIaP7M7Rdjc5eUm/Yu5AA==
+  version "18.2.79"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.79.tgz#c40efb4f255711f554d47b449f796d1c7756d865"
+  integrity sha512-RwGAGXPl9kSXwdNTafkOEuFrTBD5SA2B3iEB96xi8+xu5ddUa/cpvyVCSNn+asgLCTHkb5ZxN8gbuibYJi4s1w==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -1477,9 +1477,9 @@ camelcase-css@^2.0.1:
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
 
 caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001587, caniuse-lite@^1.0.30001599:
-  version "1.0.30001609"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001609.tgz#fc34fad75c0c6d6d6303bdbceec2da8f203dabd6"
-  integrity sha512-JFPQs34lHKx1B5t1EpQpWH4c+29zIyn/haGsbpfq3suuV9v56enjFt23zqijxGTMwy1p/4H2tjnQMY+p1WoAyA==
+  version "1.0.30001612"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001612.tgz#d34248b4ec1f117b70b24ad9ee04c90e0b8a14ae"
+  integrity sha512-lFgnZ07UhaCcsSZgWW0K5j4e69dK1u/ltrL9lTUiFOwNHs12S3UMIEYgBV0Z6C6hRDev7iRnMzzYmKabYdXF9g==
 
 chalk@^4.0.0:
   version "4.1.2"
@@ -1724,9 +1724,9 @@ eastasianwidth@^0.2.0:
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
 
 electron-to-chromium@^1.4.668:
-  version "1.4.736"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.736.tgz#ecb4348f4d5c70fb1e31c347e5bad6b751066416"
-  integrity sha512-Rer6wc3ynLelKNM4lOCg7/zPQj8tPOCB2hzD32PX9wd3hgRRi9MxEbmkFCokzcEhRVMiOVLjnL9ig9cefJ+6+Q==
+  version "1.4.748"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.748.tgz#aa7d4f2f3eac3a6a863cd1779bd4682b4bb68ed5"
+  integrity sha512-VWqjOlPZn70UZ8FTKUOkUvBLeTQ0xpty66qV0yJcAGY2/CthI4xyW9aEozRVtuwv3Kpf5xTesmJUcPwuJmgP4A==
 
 elliptic@6.5.4:
   version "6.5.4"
@@ -3262,9 +3262,9 @@ prelude-ls@^1.2.1:
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
 prettier-plugin-tailwindcss@^0.5.13:
-  version "0.5.13"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.5.13.tgz#ee3c1e07848c90abdd1edde36a09366327e31e26"
-  integrity sha512-2tPWHCFNC+WRjAC4SIWQNSOdcL1NNkydXim8w7TDqlZi+/ulZYz2OouAI6qMtkggnPt7lGamboj6LcTMwcCvoQ==
+  version "0.5.14"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.5.14.tgz#4482eed357d5e22eac259541c70aca5a4c7b9d5c"
+  integrity sha512-Puaz+wPUAhFp8Lo9HuciYKM2Y2XExESjeT+9NQoVFXZsPPnc9VYss2SpxdQ6vbatmt8/4+SN0oe0I1cPDABg9Q==
 
 prettier@^3.2.5:
   version "3.2.5"
@@ -4060,15 +4060,10 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zod@^3.22.4:
-  version "3.22.4"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
-  integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
-
-zod@^3.23.3:
-  version "3.23.3"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.3.tgz#eeb068f83acb55310174673dee631dfa0be5510d"
-  integrity sha512-tPvq1B/2Yu/dh2uAIH2/BhUlUeLIUvAjr6dpL/75I0pCYefHgjhXk1o1Kob3kTU8C7yU1j396jFHlsVWFi9ogg==
+zod@^3.22.4, zod@^3.23.3:
+  version "3.23.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.4.tgz#c63805b2f39e10d4ab3d55eb3c8cdb472c79dfb1"
+  integrity sha512-/AtWOKbBgjzEYYQRNfoGKHObgfAZag6qUJX1VbHo2PRBgS+wfWagEY2mizjfyAPcGesrJOcx/wcl0L9WnVrHFw==
 
 zustand@^4.5.2:
   version "4.5.2"

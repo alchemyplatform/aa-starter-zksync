@@ -11,12 +11,25 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useSmartAccountClient } from "@alchemy/aa-alchemy/react";
+import {
+  useSignerStatus,
+  useSmartAccountClient,
+} from "@alchemy/aa-alchemy/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
   const { client } = useSmartAccountClient({
     type: "MultiOwnerModularAccount",
   });
+  const router = useRouter();
+  const status = useSignerStatus();
+
+  useEffect(() => {
+    if (status.isDisconnected) {
+      router.push("/");
+    }
+  }, [status.isDisconnected, router]);
 
   return (
     <Card className="w-[700px]">
