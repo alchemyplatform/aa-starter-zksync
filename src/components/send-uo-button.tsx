@@ -2,17 +2,13 @@ import {
   useSendUserOperation,
   useSmartAccountClient,
 } from "@alchemy/aa-alchemy/react";
-import { Hex } from "viem";
+import { UserOperationCallData } from "@alchemy/aa-core";
 import { arbitrumSepolia } from "viem/chains";
 
 export const SendUOButton = ({
-  target,
-  data,
-  value,
+  getUO,
 }: {
-  target: Hex;
-  data: Hex;
-  value: bigint;
+  getUO: () => UserOperationCallData;
 }) => {
   const { client } = useSmartAccountClient({
     type: "MultiOwnerModularAccount",
@@ -35,15 +31,12 @@ export const SendUOButton = ({
       {sendUserOperationResult == null ? (
         <button
           className="w-full transform rounded-lg bg-[#363FF9] p-3 font-semibold text-[#FBFDFF] transition duration-500 ease-in-out hover:scale-105 disabled:bg-[#C0D4FF] disabled:hover:scale-100 dark:disabled:bg-[#4252C5]"
-          onClick={async () =>
+          onClick={async () => {
+            console.log(getUO());
             sendUserOperation({
-              uo: {
-                target,
-                data,
-                value,
-              },
-            })
-          }
+              uo: getUO(),
+            });
+          }}
           disabled={isSendingUserOperation}
         >
           <div className="flex flex-row items-center justify-center gap-3">
