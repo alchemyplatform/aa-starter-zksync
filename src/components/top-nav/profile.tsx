@@ -13,10 +13,11 @@ export default function Profile() {
   const address = account?.address;
   const short = address ? address.slice(0, 6) + "..." + address.slice(-4) : "";
 
+  // TODO: should probably leverage the `isLoadingAccount` from the `useAccount` hook to render some loading states
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex cursor-pointer items-center px-2 hover:bg-slate-100">
+        <div className="flex cursor-pointer items-center px-2 hover:bg-slate-100 ">
           <Avatar>
             <AvatarImage
               src="https://bufficornbuidlbrigade.com/Bufficorn_astronaut.png"

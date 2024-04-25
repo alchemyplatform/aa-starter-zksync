@@ -1,7 +1,7 @@
+import SharedLayout from "@/components/shared-layout";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import SharedLayout from "@/components/shared-layout";
 
 const inter = Inter({ subsets: ["latin"] });
 

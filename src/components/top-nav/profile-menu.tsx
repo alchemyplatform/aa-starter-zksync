@@ -6,7 +6,7 @@ import {
   DropdownMenuShortcut,
 } from "@/components/ui/dropdown-menu";
 import { useLogout } from "@alchemy/aa-alchemy/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export function ProfileMenu() {
   const { logout } = useLogout();
