@@ -1,16 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { SendUOButton } from "@/components/send-uo-button";
 import {
   Card,
@@ -20,16 +9,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
+  useAccount,
   useSignerStatus,
   useSmartAccountClient,
 } from "@alchemy/aa-alchemy/react";
-import { Input } from "@/components/ui/input";
+import { UserOperationCallData } from "@alchemy/aa-core";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { Address, Hex, isHex } from "viem";
-import { UserOperationCallData } from "@alchemy/aa-core";
+import { z } from "zod";
 
 const hexStringSchema = z.string().refine((data) => isHex(data), {
   message: "Invalid hex format",
@@ -48,6 +49,9 @@ interface Schema {
 }
 
 export default function Home() {
+  const { address } = useAccount({
+    type: "MultiOwnerModularAccount",
+  });
   const { client } = useSmartAccountClient({
     type: "MultiOwnerModularAccount",
   });
@@ -83,7 +87,7 @@ export default function Home() {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Your address</Label>
-                <div>{client?.account.address}</div>
+                <div>{address}</div>
               </div>
 
               <FormField

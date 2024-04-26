@@ -10,7 +10,7 @@ export const SendUOButton = ({
 }: {
   getUO: () => UserOperationCallData;
 }) => {
-  const { client } = useSmartAccountClient({
+  const { client, isLoadingClient } = useSmartAccountClient({
     type: "MultiOwnerModularAccount",
     gasManagerConfig: {
       policyId: process.env.NEXT_PUBLIC_ALCHEMY_GAS_MANAGER_POLICY_ID!,
@@ -37,7 +37,7 @@ export const SendUOButton = ({
               uo: getUO(),
             });
           }}
-          disabled={isSendingUserOperation}
+          disabled={isSendingUserOperation || isLoadingClient}
         >
           <div className="flex flex-row items-center justify-center gap-3">
             {isSendingUserOperation && (

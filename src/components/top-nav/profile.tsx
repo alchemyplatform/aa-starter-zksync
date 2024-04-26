@@ -7,10 +7,9 @@ import { ProfileMenu } from "./profile-menu";
 
 export default function Profile() {
   const user = useUser();
-  const { account } = useAccount({
+  const { address } = useAccount({
     type: "MultiOwnerModularAccount",
   });
-  const address = account?.address;
   const short = address ? address.slice(0, 6) + "..." + address.slice(-4) : "";
 
   // TODO: should probably leverage the `isLoadingAccount` from the `useAccount` hook to render some loading states
