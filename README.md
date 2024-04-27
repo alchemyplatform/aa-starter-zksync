@@ -14,7 +14,7 @@ Create an Alchemy API key, an Embedded Accounts Config, and a Gas Manager Policy
 
 ### Alchemy API Key
 
-The Alchemy API Key will allow you to read and write to blockchains through Alchemy’s reliable infrastructure. In this context, the API Key will let you created Embedded Accounts onchain for your users, and send UserOperations on behalf of those accounts.
+The Alchemy API Key will allow you to read and write to blockchains through Alchemy’s reliable infrastructure. In this context, the API Key will let you create Embedded Accounts onchain for your users, and send UserOperations on behalf of those accounts.
 
 To create an API Key, go to [https://dashboard.alchemy.com](https://dashboard.alchemy.com), sign up for an account, and go through the onboarding. Then on the [apps](https://dashboard.alchemy.com/apps) page, create an Alchemy app for the Optimism Sepolia network.
 
