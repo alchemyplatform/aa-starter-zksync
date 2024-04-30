@@ -1,19 +1,14 @@
 "use client";
 
 import LoginCTA from "@/components/login/login-cta";
-import { useSignerStatus } from "@alchemy/aa-alchemy/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useUser } from "@alchemy/aa-alchemy/react";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  const status = useSignerStatus();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status.isConnected) {
-      router.push("/home");
-    }
-  }, [status, router]);
+  const user = useUser();
+  if (user) {
+    redirect("/home");
+  }
 
   return <LoginCTA />;
 }

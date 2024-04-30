@@ -1,9 +1,5 @@
 "use client";
 
-import { useAccount, useAuthenticate } from "@alchemy/aa-alchemy/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,6 +9,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAccount, useAuthenticate } from "@alchemy/aa-alchemy/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { LoginSuccess } from "./login-success";
 
 const schema = z.object({
@@ -27,6 +27,7 @@ export const LoginForm = () => {
     isPending: isAuthenticatingUser,
     error,
   } = useAuthenticate();
+
   const { isLoadingAccount } = useAccount({
     type: "MultiOwnerModularAccount",
     skipCreate: true,
@@ -34,6 +35,9 @@ export const LoginForm = () => {
 
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+    },
   });
 
   const onSubmit = ({ email }: Schema) => {
