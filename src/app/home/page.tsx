@@ -66,6 +66,8 @@ export default function Home() {
     }
   }, [status.isDisconnected, router]);
 
+  const short = address ? address.slice(0, 6) + "..." + address.slice(-4) : "";
+
   return (
     <Form {...form}>
       <form
@@ -74,7 +76,7 @@ export default function Home() {
           evt.preventDefault();
         }}
       >
-        <Card className="w-[700px]">
+        <Card>
           <CardHeader>
             <CardTitle>Send a User Operation</CardTitle>
             <CardDescription>
@@ -84,9 +86,16 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
+              <div className="flex flex-col space-y-1.5 overflow-hidden">
                 <Label htmlFor="name">Your address</Label>
-                <div>{address}</div>
+                <a
+                  href={"https://sepolia.arbiscan.io/address/" + address}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#363FF9]"
+                >
+                  {address}
+                </a>
               </div>
 
               <FormField
@@ -120,7 +129,7 @@ export default function Home() {
                 name="value"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Value</FormLabel>
+                    <FormLabel>Value (in wei)</FormLabel>
                     <FormControl>
                       <Input {...field} defaultValue={0} />
                     </FormControl>
