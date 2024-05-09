@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAccount, useUser } from "@alchemy/aa-alchemy/react";
 import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { ProfileMenu } from "./profile-menu";
+import { blo } from "blo";
 
 export default function Profile() {
   const user = useUser();
@@ -18,10 +19,7 @@ export default function Profile() {
       <DropdownMenuTrigger asChild>
         <div className="flex cursor-pointer items-center px-2 hover:bg-slate-100 ">
           <Avatar>
-            <AvatarImage
-              src="https://bufficornbuidlbrigade.com/Bufficorn_astronaut.png"
-              alt=""
-            />
+            <AvatarImage src={blo(address!)} alt={address} />
             <AvatarFallback>0x</AvatarFallback>
           </Avatar>
           <div className="ml-3 flex-col text-ellipsis">

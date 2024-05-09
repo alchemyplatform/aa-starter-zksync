@@ -19,11 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  useAccount,
-  useSignerStatus,
-  useSmartAccountClient,
-} from "@alchemy/aa-alchemy/react";
+import { useAccount, useSignerStatus } from "@alchemy/aa-alchemy/react";
 import { UserOperationCallData } from "@alchemy/aa-core";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -52,14 +48,16 @@ export default function Home() {
   const { address } = useAccount({
     type: "MultiOwnerModularAccount",
   });
-  const { client } = useSmartAccountClient({
-    type: "MultiOwnerModularAccount",
-  });
   const router = useRouter();
   const status = useSignerStatus();
 
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      target: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+      data: "0x1337",
+      value: 0,
+    },
   });
 
   useEffect(() => {
@@ -80,7 +78,8 @@ export default function Home() {
           <CardHeader>
             <CardTitle>Send a User Operation</CardTitle>
             <CardDescription>
-              Fill out the fields below for a user operation
+              Feel free to change the fields below to send a user operation to a
+              specific target address, with some calldata and value!
             </CardDescription>
           </CardHeader>
           <CardContent>
