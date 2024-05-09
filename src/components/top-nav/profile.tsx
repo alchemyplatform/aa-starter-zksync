@@ -19,7 +19,7 @@ export default function Profile() {
       <DropdownMenuTrigger asChild>
         <div className="flex cursor-pointer items-center px-2 hover:bg-slate-100 ">
           <Avatar>
-            <AvatarImage src={blo(address!)} alt={address} />
+            <AvatarImage src={address ? blo(address) : ""} alt={address} />
             <AvatarFallback>0x</AvatarFallback>
           </Avatar>
           <div className="ml-3 flex-col text-ellipsis">
