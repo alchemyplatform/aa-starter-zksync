@@ -8,6 +8,7 @@ import {
 import { QueryClientProvider } from "@tanstack/react-query";
 import { PropsWithChildren, Suspense } from "react";
 import { ThemeProvider } from "./theme-provider";
+import { TooltipProvider } from "./ui/tooltip";
 
 export const Providers = ({
   initialState,
@@ -29,7 +30,7 @@ export const Providers = ({
             queryClient={queryClient}
             initialState={initialState}
           >
-            {children}
+            <TooltipProvider>{children}</TooltipProvider>
           </AlchemyAccountProvider>
         </QueryClientProvider>
       </Suspense>

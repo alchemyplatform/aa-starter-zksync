@@ -16,7 +16,7 @@ export default function Profile() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex cursor-pointer items-center px-2 hover:bg-slate-100 ">
+        <div className="flex cursor-pointer items-center px-2 hover:bg-slate-100">
           <Avatar>
             <AvatarImage src={address ? blo(address) : ""} alt={address} />
             <AvatarFallback>0x</AvatarFallback>

@@ -15,14 +15,5 @@ export default function SharedLayout({
     headers().get("cookie") ?? undefined,
   );
 
-  return (
-    <Providers initialState={intialState}>
-      <div className="max-w-screen flex h-screen max-h-screen w-screen flex-col">
-        <TopNav />
-        <main className="flex max-h-screen grow flex-col items-center justify-center gap-4 sm:p-8 md:p-4 lg:p-6 xl:p-8 2xl:p-24">
-          {children}
-        </main>
-      </div>
-    </Providers>
-  );
+  return <Providers initialState={intialState}>{children}</Providers>;
 }

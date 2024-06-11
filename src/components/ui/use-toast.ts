@@ -88,6 +88,7 @@ export const reducer = (state: State, action: Action): State => {
       };
 
     case "DISMISS_TOAST": {
+      debugger;
       const { toastId } = action;
 
       // ! Side effects ! - This could be extracted into a dismissToast() action,

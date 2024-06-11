@@ -21,7 +21,7 @@ const useTransaction = () => {
     to,
     value,
     data,
-  }: TransactionArgs): Promise<string | undefined> => {
+  }: TransactionArgs): Promise<Hex | undefined> => {
     if (!signer || !client) return;
 
     const { withHash } = createToast();
