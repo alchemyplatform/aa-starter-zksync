@@ -1,11 +1,34 @@
 import { cookieStorage, createConfig } from "@alchemy/aa-alchemy/config";
-import { arbitrumSepolia } from "@alchemy/aa-core";
+import { AlchemyChainMap } from "@alchemy/aa-core";
 import { QueryClient } from "@tanstack/react-query";
+import { Chain, Hex } from "viem";
+import { zkSyncSepoliaTestnet } from "viem/zksync";
+
+export const chain: Chain = {
+  ...zkSyncSepoliaTestnet,
+  rpcUrls: {
+    ...zkSyncSepoliaTestnet.rpcUrls,
+    alchemy: {
+      http: ["https://zksync-sepolia.g.alchemy.com/v2"],
+    },
+  },
+};
+
+AlchemyChainMap.set(chain.id, chain);
 
 export const queryClient = new QueryClient();
 export const config = createConfig({
-  rpcUrl: "/api/rpc",
-  chain: arbitrumSepolia,
+  rpcUrl: "/api/rpc/chain/" + chain.id,
+  signerConnection: {
+    rpcUrl: "/api/rpc/",
+  },
+  chain,
   ssr: true,
   storage: cookieStorage,
+  sessionConfig: {
+    expirationTimeMs: 2 * 60 * 60 * 1000,
+  },
 });
+
+export const PAYMASTER_ADDRESS: Hex =
+  "0xaEaD05FD4986e6128587eB2E714B6fe1751B41C3";

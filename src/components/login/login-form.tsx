@@ -9,7 +9,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAccount, useAuthenticate } from "@alchemy/aa-alchemy/react";
+import {
+  useAccount,
+  useAuthenticate,
+  useSigner,
+  useSignerStatus,
+} from "@alchemy/aa-alchemy/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,11 +33,6 @@ export const LoginForm = () => {
     error,
   } = useAuthenticate();
 
-  const { isLoadingAccount } = useAccount({
-    type: "MultiOwnerModularAccount",
-    skipCreate: true,
-  });
-
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -44,7 +44,7 @@ export const LoginForm = () => {
     authenticate({ type: "email", email });
   };
 
-  if (isAuthenticatingUser || isLoadingAccount) {
+  if (isAuthenticatingUser) {
     return <LoginSuccess />;
   }
 

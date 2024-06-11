@@ -1,6 +1,6 @@
 "use client";
 
-import { SendUOButton } from "@/components/send-uo-button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAccount, useSignerStatus } from "@alchemy/aa-alchemy/react";
-import { UserOperationCallData } from "@alchemy/aa-core";
+import useTransaction from "@/components/web3/use-transaction";
+import { useSignerStatus, useUser } from "@alchemy/aa-alchemy/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -45,11 +45,11 @@ interface Schema {
 }
 
 export default function Home() {
-  const { address } = useAccount({
-    type: "MultiOwnerModularAccount",
-  });
+  const user = useUser();
+  const address = user?.address;
   const router = useRouter();
   const status = useSignerStatus();
+  const { sendTransaction } = useTransaction();
 
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
@@ -60,13 +60,20 @@ export default function Home() {
     },
   });
 
+  const send = () => {
+    const { target, data, value } = form.getValues();
+    sendTransaction({
+      to: target,
+      data,
+      value: BigInt(value),
+    });
+  };
+
   useEffect(() => {
     if (status.isDisconnected) {
       router.push("/");
     }
   }, [status.isDisconnected, router]);
-
-  const short = address ? address.slice(0, 6) + "..." + address.slice(-4) : "";
 
   return (
     <Form {...form}>
@@ -78,7 +85,7 @@ export default function Home() {
       >
         <Card>
           <CardHeader>
-            <CardTitle>Send a User Operation</CardTitle>
+            <CardTitle>Send a Transaction</CardTitle>
             <CardDescription>
               Feel free to change the fields below to send a user operation to a
               specific target address, with some calldata and value!
@@ -89,7 +96,7 @@ export default function Home() {
               <div className="flex flex-col space-y-1.5 overflow-hidden">
                 <Label htmlFor="name">Your address</Label>
                 <a
-                  href={"https://sepolia.arbiscan.io/address/" + address}
+                  href={"https://sepolia.explorer.zksync.io/address/" + address}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#363FF9]"
@@ -103,7 +110,7 @@ export default function Home() {
                 name="target"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Target</FormLabel>
+                    <FormLabel>To</FormLabel>
                     <FormControl>
                       <Input placeholder="0x..." {...field} />
                     </FormControl>
@@ -140,13 +147,9 @@ export default function Home() {
             </div>
           </CardContent>
           <CardFooter className="flex justify-between">
-            <SendUOButton
-              getUO={(): UserOperationCallData => ({
-                target: form.getValues("target"),
-                data: form.getValues("data"),
-                value: BigInt(form.getValues("value") || 0),
-              })}
-            />
+            <Button type="submit" onClick={() => send()}>
+              Send
+            </Button>
           </CardFooter>
         </Card>
       </form>

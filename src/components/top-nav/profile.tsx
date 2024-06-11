@@ -1,16 +1,15 @@
 "use-client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useAccount, useUser } from "@alchemy/aa-alchemy/react";
+import { useUser } from "@alchemy/aa-alchemy/react";
 import { DropdownMenu, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { ProfileMenu } from "./profile-menu";
 import { blo } from "blo";
 
 export default function Profile() {
   const user = useUser();
-  const { address } = useAccount({
-    type: "MultiOwnerModularAccount",
-  });
+  const email = user?.email;
+  const address = user?.address;
   const short = address ? address.slice(0, 6) + "..." + address.slice(-4) : "";
 
   // TODO: should probably leverage the `isLoadingAccount` from the `useAccount` hook to render some loading states
@@ -24,7 +23,7 @@ export default function Profile() {
           </Avatar>
           <div className="ml-3 flex-col text-ellipsis">
             <div>{short}</div>
-            <div>{user?.email}</div>
+            <div>{email}</div>
           </div>
         </div>
       </DropdownMenuTrigger>
