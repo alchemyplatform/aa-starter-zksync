@@ -4,6 +4,7 @@ import React, {
   useState,
   useEffect,
   ReactNode,
+  useCallback,
 } from "react";
 import { useBundlerClient } from "@alchemy/aa-alchemy/react";
 import { Hex } from "viem";
@@ -40,23 +41,26 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const client = useBundlerClient();
 
-  const fetchTransactionStatus = async (hash: Hex) => {
-    try {
-      const { status } = await client.getTransactionReceipt({ hash });
-      const newStatus: TransactionStatus =
-        status === "success" ? "success" : "reverted";
+  const fetchTransactionStatus = useCallback(
+    async (hash: Hex) => {
+      try {
+        const { status } = await client.getTransactionReceipt({ hash });
+        const newStatus: TransactionStatus =
+          status === "success" ? "success" : "reverted";
 
-      setTransactions((prev) =>
-        prev.map((tx) =>
-          tx.hash === hash ? { ...tx, status: newStatus } : tx,
-        ),
-      );
-    } catch (ex) {
-      setTimeout(() => {
-        fetchTransactionStatus(hash);
-      }, 1500);
-    }
-  };
+        setTransactions((prev) =>
+          prev.map((tx) =>
+            tx.hash === hash ? { ...tx, status: newStatus } : tx,
+          ),
+        );
+      } catch (ex) {
+        setTimeout(() => {
+          fetchTransactionStatus(hash);
+        }, 1500);
+      }
+    },
+    [client],
+  );
 
   const addTransaction = (hash: Hex) => {
     setTransactions((prev) => [...prev, { hash, status: "pending" }]);
@@ -73,7 +77,7 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [transactions]);
+  }, [transactions, fetchTransactionStatus]);
 
   return (
     <TransactionContext.Provider value={{ transactions, addTransaction }}>

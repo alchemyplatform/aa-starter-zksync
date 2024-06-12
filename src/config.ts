@@ -30,5 +30,5 @@ export const config = createConfig({
   },
 });
 
-export const PAYMASTER_ADDRESS: Hex =
-  "0xaEaD05FD4986e6128587eB2E714B6fe1751B41C3";
+export const PAYMASTER_ADDRESS: Hex | undefined = process.env
+  .NEXT_PUBLIC_PAYMASTER_ADDRESS as Hex | undefined;

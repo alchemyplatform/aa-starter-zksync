@@ -1,6 +1,10 @@
 import { useBundlerClient, useSigner } from "@alchemy/aa-alchemy/react";
 import { Hex } from "viem";
-import { chainConfig, zkSyncSepoliaTestnet } from "viem/zksync";
+import {
+  ZkSyncTransactionSerializable,
+  chainConfig,
+  zkSyncSepoliaTestnet,
+} from "viem/zksync";
 import { getPaymasterParams } from "zksync-ethers/build/paymaster-utils";
 import { DEFAULT_GAS_PER_PUBDATA_LIMIT } from "zksync-ethers/build/utils";
 import useTransactionToast from "./use-transaction-toast";
@@ -30,39 +34,38 @@ const useTransaction = () => {
     const nonce = await client.getTransactionCount({ address });
     const gas = await client.estimateGas({ account: address, to, data, value });
 
-    const { paymasterInput } = getPaymasterParams(PAYMASTER_ADDRESS, {
-      type: "General",
-      innerInput: new Uint8Array(),
-    });
-
-    const args = {
-      account: address,
+    const args: ZkSyncTransactionSerializable = {
       from: address,
       maxFeePerGas: gasPrice,
       gas,
-      gasPerPubdata: BigInt(DEFAULT_GAS_PER_PUBDATA_LIMIT),
       nonce,
       chainId: client.chain.id,
       to,
       data,
       value,
-      paymaster: PAYMASTER_ADDRESS,
-      paymasterInput: paymasterInput as Hex,
     };
 
-    const eip712Domain = zkSyncSepoliaTestnet.custom.getEip712Domain({
-      ...args,
-      type: "eip712",
+    if (PAYMASTER_ADDRESS) {
+      const { paymasterInput } = getPaymasterParams(PAYMASTER_ADDRESS, {
+        type: "General",
+        innerInput: new Uint8Array(),
+      });
+      args.paymaster = PAYMASTER_ADDRESS;
+      args.paymasterInput = paymasterInput as Hex;
+      args.gasPerPubdata = BigInt(DEFAULT_GAS_PER_PUBDATA_LIMIT);
+
+      // be sure to do this after all args are set,
+      // otherwise the custom signature wont be valid
+      const eip712Domain = zkSyncSepoliaTestnet.custom.getEip712Domain({
+        ...args,
+        type: "eip712",
+      });
+      args.customSignature = await signer.signTypedData(eip712Domain);
+    }
+
+    const signedTx = await signer.signTransaction(args, {
+      serializer: chainConfig.serializers.transaction,
     });
-
-    const customSignature = await signer.signTypedData(eip712Domain);
-
-    const signedTx = await signer.signTransaction(
-      { ...args, customSignature },
-      {
-        serializer: chainConfig.serializers.transaction,
-      },
-    );
 
     const txHash = await client.sendRawTransaction({
       serializedTransaction: signedTx,
