@@ -14,6 +14,7 @@ export function AccountMain() {
   const user = useUser();
   const { logout } = useLogout();
   const address = user?.address;
+  const email = user?.email;
 
   return (
     <main className="flex h-full flex-1 items-center justify-center">
@@ -22,9 +23,13 @@ export function AccountMain() {
           <CardTitle className="text-2xl">Account</CardTitle>
           <CardDescription>Your account details</CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-4">
+        <CardContent className="grid gap-4 border-t pt-6">
           <div className="grid gap-2">
-            <Label htmlFor="name">Your address</Label>
+            <Label>Your email</Label>
+            <div>{email}</div>
+          </div>
+          <div className="grid gap-2">
+            <Label>Your address</Label>
             <a
               href={"https://sepolia.explorer.zksync.io/address/" + address}
               target="_blank"
