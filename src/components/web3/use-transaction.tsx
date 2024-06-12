@@ -9,6 +9,9 @@ import { getPaymasterParams } from "zksync-ethers/build/paymaster-utils";
 import { DEFAULT_GAS_PER_PUBDATA_LIMIT } from "zksync-ethers/build/utils";
 import useTransactionToast from "./use-transaction-toast";
 import { PAYMASTER_ADDRESS } from "@/config";
+import { Provider, types } from "zksync-ethers";
+
+const provider = Provider.getDefaultProvider(types.Network.Sepolia);
 
 interface TransactionArgs {
   to: Hex;
@@ -32,7 +35,12 @@ const useTransaction = () => {
     const address = await signer.getAddress();
     const gasPrice = await client.getGasPrice();
     const nonce = await client.getTransactionCount({ address });
-    const gas = await client.estimateGas({ account: address, to, data, value });
+    const gas = await client.estimateGas({
+      account: address,
+      to,
+      data,
+      value,
+    });
 
     const args: ZkSyncTransactionSerializable = {
       from: address,
@@ -52,6 +60,9 @@ const useTransaction = () => {
       });
       args.paymaster = PAYMASTER_ADDRESS;
       args.paymasterInput = paymasterInput as Hex;
+
+      // re-estimate gas with the paymaster custom data
+      args.gas = await provider.estimateGas({ ...args, type: 113 });
       args.gasPerPubdata = BigInt(DEFAULT_GAS_PER_PUBDATA_LIMIT);
 
       // be sure to do this after all args are set,
