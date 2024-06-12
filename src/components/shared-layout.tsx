@@ -3,7 +3,6 @@ import { cookieToInitialState } from "@alchemy/aa-alchemy/config";
 import { headers } from "next/headers";
 import "../styles/globals.css";
 import { Providers } from "./providers";
-import TopNav from "./top-nav/top-nav";
 
 export default function SharedLayout({
   children,
