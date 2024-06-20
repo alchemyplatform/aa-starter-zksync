@@ -4,11 +4,10 @@ This is a Next.js app where users can send transactions on zkSync, optionally ga
 
 ## 🔍 **Prerequisites**
 
-### Node.js, pnpm & yarn
+### Node.js & yarn
 Before running this application, make sure you have the following installed:
 ```bash
 node --version  # Checks the installed version of Node.js
-pnpm --version  # Checks the installed version of pnpm
 yarn --version  # Checks the installed version of yarn
 ```
 
@@ -16,12 +15,6 @@ If you do not have Node.js installed, please install it from [nodejs.org](https:
 
 ```bash
 brew install node
-```
-
-If you do not have `pnpm` installed, please install it from [pnpm installation guide](https://pnpm.io/installation). For example:
-
-```bash
-npm install -g pnpm
 ```
 
 If you do not have `yarn` installed, please install it from [yarn installation guide](https://classic.yarnpkg.com/en/docs/install). For example:
