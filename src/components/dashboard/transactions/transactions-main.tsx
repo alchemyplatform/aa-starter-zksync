@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { AccountDetails } from "./account-details";
 import TransactionForm from "./transaction-form";
 import Transactions from "./transactions";
-import { TransactionProvider } from "@/components/web3/transaction-context";
+import { TransactionProvider } from "./transaction-context";
 
 export function TransactionsMain() {
   return (

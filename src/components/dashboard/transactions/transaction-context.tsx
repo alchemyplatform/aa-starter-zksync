@@ -53,11 +53,7 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
             tx.hash === hash ? { ...tx, status: newStatus } : tx,
           ),
         );
-      } catch (ex) {
-        setTimeout(() => {
-          fetchTransactionStatus(hash);
-        }, 1500);
-      }
+      } catch (ex) {}
     },
     [client],
   );
@@ -74,7 +70,7 @@ export const TransactionProvider: React.FC<{ children: ReactNode }> = ({
           fetchTransactionStatus(transaction.hash);
         }
       });
-    }, 5000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [transactions, fetchTransactionStatus]);

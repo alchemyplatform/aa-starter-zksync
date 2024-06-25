@@ -18,12 +18,11 @@ const useTransactionToast = () => {
     });
 
     const withHash = (transactionHash: Hex) => {
-      const fetchTransactionStatus = async () => {
+      const fetchTransactionStatus = async (tryCount = 0) => {
         try {
           const { status } = await client.getTransactionReceipt({
             hash: transactionHash,
           });
-          setTransactionStatus(status);
 
           if (status === "success") {
             update({
@@ -50,10 +49,20 @@ const useTransactionToast = () => {
               description: "There was an error processing your transaction.",
             });
           }
+
+          setTransactionStatus(status);
         } catch (ex) {
-          setTimeout(() => {
-            fetchTransactionStatus();
-          }, 1500);
+          if (tryCount < 3) {
+            setTimeout(() => {
+              fetchTransactionStatus(tryCount + 1);
+            }, 500);
+          } else {
+            update({
+              id,
+              title: "Transaction Failed",
+              description: "There was an error processing your transaction.",
+            });
+          }
         }
       };
 

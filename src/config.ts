@@ -1,10 +1,10 @@
 import { cookieStorage, createConfig } from "@alchemy/aa-alchemy/config";
 import { AlchemyChainMap } from "@alchemy/aa-core";
 import { QueryClient } from "@tanstack/react-query";
-import { Chain, Hex } from "viem";
-import { zkSyncSepoliaTestnet } from "viem/zksync";
+import { Hex } from "viem";
+import { zkSyncSepoliaTestnet } from "viem-aa-sdk-compatible/zksync";
 
-export const chain: Chain = {
+export const chain = {
   ...zkSyncSepoliaTestnet,
   rpcUrls: {
     ...zkSyncSepoliaTestnet.rpcUrls,

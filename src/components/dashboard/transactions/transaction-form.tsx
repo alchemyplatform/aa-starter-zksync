@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Address, Hex, isHex } from "viem";
 import { z } from "zod";
-import { useTransactionContext } from "../../web3/transaction-context";
+import { useTransactionContext } from "./transaction-context";
 
 const hexStringSchema = z.string().refine((data) => isHex(data), {
   message: "Invalid hex format",

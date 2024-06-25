@@ -1,5 +1,5 @@
 import React from "react";
-import { useTransactionContext } from "../../web3/transaction-context";
+import { useTransactionContext } from "./transaction-context";
 import {
   Tooltip,
   TooltipContent,
