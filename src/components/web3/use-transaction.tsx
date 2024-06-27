@@ -1,14 +1,5 @@
-import { useSigner } from "@alchemy/aa-alchemy/react";
+import { Hash, Hex } from "viem";
 import {
-  Hash,
-  Hex,
-  LocalAccount,
-  createWalletClient,
-  http,
-  publicActions,
-} from "viem";
-import {
-  zkSyncSepoliaTestnet,
   sendTransaction as sendZkSyncTransaction,
   sendEip712Transaction,
 } from "viem/zksync";
@@ -16,6 +7,7 @@ import { getPaymasterParams } from "zksync-ethers/build/paymaster-utils";
 import { DEFAULT_GAS_PER_PUBDATA_LIMIT } from "zksync-ethers/build/utils";
 import useTransactionToast from "./use-transaction-toast";
 import { PAYMASTER_ADDRESS } from "@/config";
+import useSignerClient from "./use-signer-client";
 
 interface TransactionArgs {
   to: Hex;
@@ -24,7 +16,7 @@ interface TransactionArgs {
 }
 
 const useTransaction = () => {
-  const signer = useSigner();
+  const signerClient = useSignerClient();
   const { createToast } = useTransactionToast();
 
   const sendTransaction = async ({
@@ -32,15 +24,7 @@ const useTransaction = () => {
     value,
     data,
   }: TransactionArgs): Promise<Hex | undefined> => {
-    if (!signer) return;
-
-    const account = signer.toViemAccount() as LocalAccount;
-    const client = createWalletClient({
-      account,
-      chain: zkSyncSepoliaTestnet,
-      transport: http("/api/rpc/chain/" + zkSyncSepoliaTestnet.id),
-    }).extend(publicActions);
-
+    if (!signerClient) return;
     const { withHash } = createToast();
 
     let hash: Hash;
@@ -50,18 +34,18 @@ const useTransaction = () => {
         type: "General",
         innerInput: new Uint8Array(),
       });
-      hash = await sendEip712Transaction(client, {
+      hash = await sendEip712Transaction(signerClient, {
         to,
         data,
         value,
-        account,
+        account: signerClient.account,
         paymaster: PAYMASTER_ADDRESS,
         paymasterInput: paymasterInput as Hex,
         gasPerPubdata: BigInt(DEFAULT_GAS_PER_PUBDATA_LIMIT),
-        maxFeePerGas: await client.getGasPrice(),
+        maxFeePerGas: await signerClient.getGasPrice(),
       });
     } else {
-      hash = await sendZkSyncTransaction(client, {
+      hash = await sendZkSyncTransaction(signerClient, {
         to,
         data,
         value,
