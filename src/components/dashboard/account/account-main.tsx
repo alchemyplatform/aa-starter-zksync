@@ -9,9 +9,12 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useLogout, useUser } from "@alchemy/aa-alchemy/react";
+import { useExportAccount } from "@alchemy/aa-alchemy/react";
 
 export function AccountMain() {
   const user = useUser();
+  const { exportAccount, isExported, isExporting, ExportAccountComponent } =
+    useExportAccount();
   const { logout } = useLogout();
   const address = user?.address;
   const email = user?.email;
@@ -40,10 +43,23 @@ export function AccountMain() {
             </a>
           </div>
         </CardContent>
-        <CardFooter className="border-t px-6 py-4">
+        <CardFooter className="flex-col gap-y-4 border-t px-6 py-4">
           <Button className="w-full" onClick={() => logout()}>
             Logout
           </Button>
+          {!isExported ? (
+            <Button
+              variant="secondary"
+              className="w-full"
+              onClick={() => exportAccount()}
+              disabled={isExporting}
+            >
+              Export Account
+            </Button>
+          ) : (
+            <strong>Seed Phrase</strong>
+          )}
+          <ExportAccountComponent className="w-full" isExported={isExported} />
         </CardFooter>
       </Card>
     </main>
