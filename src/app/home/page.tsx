@@ -5,7 +5,7 @@ import { TransactionsMain } from "@/components/dashboard/transactions/transactio
 
 export default function Home() {
   return (
-    <Dashboard title="Send Transactions">
+    <Dashboard title="Mint Tokens">
       <TransactionsMain />
     </Dashboard>
   );

@@ -3,6 +3,7 @@ import { AccountDetails } from "./account-details";
 import TransactionForm from "./transaction-form";
 import Transactions from "./transactions";
 import { TransactionProvider } from "./transaction-context";
+import BurnForm from "./burn-form";
 
 export function TransactionsMain() {
   return (
@@ -21,9 +22,15 @@ export function TransactionsMain() {
             </fieldset>
             <fieldset className="rounded-lg border p-4">
               <legend className="-ml-1 px-1 text-sm font-medium">
-                Transaction
+                Mint Tokens
               </legend>
               <TransactionForm />
+            </fieldset>
+            <fieldset className="rounded-lg border p-4">
+              <legend className="-ml-1 px-1 text-sm font-medium">
+                Burn Tokens
+              </legend>
+              <BurnForm />
             </fieldset>
           </div>
         </div>

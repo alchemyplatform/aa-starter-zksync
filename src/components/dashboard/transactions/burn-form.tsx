@@ -29,7 +29,7 @@ interface Schema {
   amount: number;
 }
 
-export default function TransactionForm() {
+export default function BurnForm() {
   const router = useRouter();
   const status = useSignerStatus();
   const { addTransaction } = useTransactionContext();
@@ -47,8 +47,8 @@ export default function TransactionForm() {
     const txHash = await sendTransaction({
       to: TOKEN_ADDRESS,
       data: encodeFunctionData({
-        abi: parseAbi(["function mintMore(uint) external"]),
-        functionName: "mintMore",
+        abi: parseAbi(["function burn(uint) external"]),
+        functionName: "burn",
         args: [BigInt(amount) * 10n ** 18n],
       }),
       value: 0n,

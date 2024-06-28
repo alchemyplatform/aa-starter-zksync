@@ -30,5 +30,7 @@ export const config = createConfig({
   },
 });
 
+export const TOKEN_ADDRESS: Hex = "0xe3Db158F42F2D01Aa76840e93db1148493cca980";
+
 export const PAYMASTER_ADDRESS: Hex | undefined = process.env
   .NEXT_PUBLIC_PAYMASTER_ADDRESS as Hex | undefined;
